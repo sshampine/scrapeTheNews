@@ -1,18 +1,16 @@
 
-	<h1>{{title}}</h1>
-	<h2>Tech News Worth Scraping</h2>
-	<a href="/scrape"><button type="submit" id="scrape">click to scrape</button></a>
-	<h3>current news</h3>
-
-	<div id="articles">
-		{{# each contents}}
-		<h3>{{this.title}}</h3>
-		<h4>{{this.link}}</h4>
-		<br>
-		{{/each}}
-	</div>
-	<div id="notes"></div>
-
-	
-
-
+<h1>Tech News Scraper</h1>
+      <a href="/scrape"><button type="button" class="btn">Scrape</button></a>
+<div class="container">
+	<div class="row">
+	  {{#each content}}
+      <div class="panel panel-default">
+   		<div class="panel panel-heading">{{this.title}}</div>
+   		<div class="panel panel-body">{{this.link}}</div>
+   		<div class="panel-footer"><a href="/articles/"{{_id}}">Comments</a></div>
+   		
+       <div id="notes"></div>
+      	</div>
+      	{{/each}}
+       </div>
+</div>
