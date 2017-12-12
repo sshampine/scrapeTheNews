@@ -40,9 +40,9 @@ mongoose.connect(MONGODB_URI, {
 
 // Routes
 
-app.get("/", function(req, res, next) {
-  db.Article.find(function(error, dbArticles) {
-      res.render("index", {title: "Tech News", content: dbArticles})
+app.get("/", function(req, res) {
+  db.Article.find(function(error) {
+      res.render("index", {title: "Tech News"})
       //res.render("index", {title: "Tech News Scraper", contents: dbArticles})
     })
   })
@@ -135,6 +135,17 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
+
+app.get("/clear", function(req, res) {
+  db.Article.remove({}, function(err, dbClear) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log("articles removed")
+    }
+  })
+  res.redirect("/")
+})
 
 // Start the server
 app.listen(PORT, function() {

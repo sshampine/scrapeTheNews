@@ -1,16 +1,9 @@
-
+{{> menu}}
 <h1>Tech News Scraper</h1>
-      <a href="/scrape"><button type="button" class="btn">Scrape</button></a>
-<div class="container">
-	<div class="row">
-	  {{#each content}}
-      <div class="panel panel-default">
-   		<div class="panel panel-heading">{{this.title}}</div>
-   		<div class="panel panel-body">{{this.link}}</div>
-   		<div class="panel-footer"><a href="/articles/"{{_id}}">Comments</a></div>
-   		
-       <div id="notes"></div>
-      	</div>
-      	{{/each}}
-       </div>
-</div>
+      
+	
+	<div id="articles"></div>
+    <div id="notes"></div>
+      	
+      
+    
