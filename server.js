@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require('express-handlebars');
-
+var request = require("request");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -32,7 +32,7 @@ app.set("view engine", "handlebars");
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.URI || "mongodb://localhost/week18Populater";
+var MONGODB_URI = process.env.URI || "mongodb://localhost/webScraper";
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {
   useMongoClient: true
@@ -50,9 +50,9 @@ app.get("/", function(req, res) {
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  axios.get("http://www.gizmodo.com/").then(function(response) {
+  request("http://www.gizmodo.com/", function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
+    var $ = cheerio.load(html);
 
     // Now, we grab every h2 within an article tag, and do the following:
     $("h1.headline").each(function(i, element) {
